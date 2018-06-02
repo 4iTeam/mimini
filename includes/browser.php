@@ -74,7 +74,7 @@ class MiminiBrowserHistory
     /**
      *    Last fully qualified URL for current history
      *    position.
-     * @return MiminiUrl        URL for this position.
+     * @return MiminiUrl|boolean        URL for this position.
      * @access public
      */
     function getUrl()
@@ -88,7 +88,7 @@ class MiminiBrowserHistory
     /**
      *    Parameters of last fetch from current history
      *    position.
-     * @return MiminiPostEncoding    Post parameters.
+     * @return MiminiPostEncoding|boolean    Post parameters.
      * @access public
      */
     function getParameters()
@@ -230,7 +230,7 @@ class MiminiBrowser
      *    Get the HTML parser to use. Can be overridden by
      *    setParser. Otherwise scans through the available parsers and
      *    uses the first one which is available.
-     * @return MiminiPHPPageBuilder|MiminiTidyPageBuilder
+     * @return MiminiPHPPageBuilder|MiminiTidyPageBuilder|MiminiParserInterface|boolean
      */
     protected function getParser()
     {
@@ -297,7 +297,7 @@ class MiminiBrowser
      *    frame pages unless frames are disabled.
      * @param MiminiHttpResponse $response Response from fetch.
      * @param integer $depth Nested frameset depth.
-     * @return MiminiPage                     Parsed HTML.
+     * @return MiminiFrameset|MiminiPage                     Parsed HTML.
      * @access private
      */
     protected function parse($response, $depth = 0)
@@ -409,7 +409,7 @@ class MiminiBrowser
 
     /**
      *    Adds a header to every fetch.
-     * @param string $header Header line to add to every
+     * @param string|array $header Header line to add to every
      *                                request until cleared.
      * @param string $value value of header
      * @access public
@@ -717,7 +717,7 @@ class MiminiBrowser
     /**
      *    Accessor for current frame focus. Will be
      *    false if no frame has focus.
-     * @return integer/string/boolean    Label if any, otherwise
+     * @return array    Label if any, otherwise
      *                                      the position in the frameset
      *                                      or false if none.
      * @access public

@@ -9,14 +9,14 @@
 
 class MiminiSelector{
 
-    function __construct(){
+    function __construct($selector){
 
     }
     /**
      * @param $widget MiminiTag
      * @return boolean
      */
-    function isMatch($widget){}
+    function isMatch($widget){ return false;}
     function hash(){
         return 'miminiSelector';
     }
@@ -41,7 +41,7 @@ class MiminiByAttributes extends MiminiSelector{
         }
         if(isset($attributes['id_or_name'])){
             $matched=$tag->getAttribute('id')==$attributes['id_or_name'] || $tag->getAttribute('name')==$attributes['id_or_name'];
-            unset($attributes);
+            $attributes=[];
         }
         if(isset($attributes['label'])){
             $matched=$matched&&method_exists($tag, 'isLabel')&&$tag->isLabel($attributes['label']);
@@ -79,6 +79,10 @@ class MiminiByName extends MiminiByAttributes{
  */
 class MiminiByLabel extends MiminiByAttributes
 {
+    /**
+     * MiminiByLabel constructor.
+     * @param string $label
+     */
     function __construct($label){
         parent::__construct(array('label'=>$label));
     }
@@ -115,7 +119,7 @@ class MiminiSelectorFactory{
             return $selector;
         }
         if(is_array($selector)||is_object($selector)){
-            $hash=md5($selector);
+            $hash=md5(json_encode($selector));
             if(!isset(self::$caches[$hash])){
                 self::$caches[$hash]=new MiminiByAttributes($selector);
             }
