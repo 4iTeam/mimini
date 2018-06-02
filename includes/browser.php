@@ -153,10 +153,10 @@ class MiminiBrowserHistory
         if($params){
             $save.=json_encode($params);
         }
-        file_put_contents(MIMINI_DIR.'/'.$this->log_file,$save.PHP_EOL,FILE_APPEND);
+        file_put_contents(MIMINI_DATA.'/'.$this->log_file,$save.PHP_EOL,FILE_APPEND);
     }
     function __construct(){
-        file_put_contents(MIMINI_DIR.'/'.$this->log_file,'');
+        file_put_contents(MIMINI_DATA.'/'.$this->log_file,'');
     }
 }
 

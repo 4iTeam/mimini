@@ -450,6 +450,6 @@ class MiminiCookieJar
         if(!$this->session){
             return false;
         }
-        return MIMINI_INC.'/data/'.$this->session.'.sess';
+        return MIMINI_DATA.'/'.$this->session.'.sess';
     }
 }

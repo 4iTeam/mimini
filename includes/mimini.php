@@ -54,7 +54,7 @@ class Mimini
         }
         $session=trim($session);
         if($session){
-            @file_put_contents(MIMINI_INC.'/last',$session);
+            @file_put_contents(MIMINI_DATA.'/last',$session);
             if(isset(self::$instances[$session])) {
                 return self::$instances[$session];
             }else{
@@ -71,14 +71,14 @@ class Mimini
         return self::open(null);
     }
     static function lastSession(){
-        if(!$last=trim(file_get_contents(MIMINI_INC.'/last'))){
+        if(!$last=trim(file_get_contents(MIMINI_DATA.'/last'))){
             $last=md5(time());
         }
         self::open($last);
     }
     static function reset(){
-        file_put_contents(MIMINI_INC.'/last','');
-        array_map('unlink', glob(MIMINI_INC.'/data/*'));
+        file_put_contents(MIMINI_DATA.'/last','');
+        array_map('unlink', glob(MIMINI_DATA.'/*'));
     }
 
     /**
